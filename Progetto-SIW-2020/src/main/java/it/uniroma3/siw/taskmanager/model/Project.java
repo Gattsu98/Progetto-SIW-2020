@@ -139,6 +139,11 @@ public class Project {
 		this.tags = tags;
 	}
 	
+	public boolean deleteTag(Tag t) {
+		return this.tags.remove(t);
+	}
+	
+	
 	public boolean addTag(Tag t) {
 		return this.getTags().add(t);
 	}

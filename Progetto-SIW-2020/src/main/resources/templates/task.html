@@ -6,9 +6,9 @@
 <body>
 	<table>
 		<tr>
-			<td th:text=" ' > ' + ${task.name} + ' < '" style="font-style: italic; font-weight:bolder; ; font-size: 20px; font-variant: small-caps;"></td>
-			<td style="font-size: 15px; font-weight:100; "> task relativa al progetto </td>
-			<td><a th:href="'/projects/'+${project.id}" th:text=" ' > ' + ${project.name} + ' < '" style="font-size: 20px; font-style: italic; font-variant: small-caps;" ></a></td>
+			<td th:text="${task.name}" style="font-style: italic; font-weight:bolder; ; font-size: 20px; font-variant: small-caps;"></td>
+			<td style="font-size: 15px"> > task relativa al progetto > </td>
+			<td><a th:href="'/projects/'+${project.id}" th:text="${project.name}" style="font-size: 20px; font-style: italic; font-variant: small-caps;" ></a></td>
 			<td>
 				<form id="editTask" th:action="@{/projects/task/{taskId}/editTask(taskId=${task.id})}" method="GET">
 					<button th:if="${project.owner.equals(loggedUser)}" type="submit" name="comando" value="edit">EDIT</button>
@@ -55,7 +55,7 @@
 		<div th:text="${task.description}"></div>
 	</div>
 	
-	<table th:if="${task.tags.size()>=0}">
+	<table th:if="${task.tags.size()>0}">
 		<tr>
 			<td><h3>Tags:</h3></td>
 		</tr>
@@ -63,8 +63,21 @@
 		<td>
 			<ul>
 				<li th:each="tag : ${task.tags}">
-					<div th:text="${tag.name}" th:style="'color:' + ${tag.color}"></div>
+					<table>		
+						<tr>
+							<td th:text="${tag.name}" th:style="'color:' + ${tag.color}"></td>
+							<td>
+								<form th:action="@{'/tasks/' + ${task.id} + '/tag/' + ${tag.id} + '/removeTag'}" method="POST">
+									<button th:if="${project.owner.equals(loggedUser)}" type="submit" name="comando" value="removeTag">REMOVE TAG</button>
+								</form>
+							</td>
+						</tr>
+						
+					</table>
 					<div th:text="${tag.description}"></div>
+					<table>
+					
+					</table>
 				</li>
 			</ul>
 		</tr>

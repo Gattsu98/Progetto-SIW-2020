@@ -6,8 +6,10 @@
 
 <body>
 		<h1>Share project with an user!</h1>
-<h3>Select one user from the list!</h3>
-<table>
+
+<div th:if="${availableCredentialsList.size()==0}">You can't share the project with no other users</div>
+<table th:if="${availableCredentialsList.size()>0}">
+	<caption style="font-size: 20px">Select an user from the list!</caption>
     <thead>
     <tr>
     	<th>Username</th>

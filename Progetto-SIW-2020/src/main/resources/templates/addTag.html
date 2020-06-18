@@ -8,17 +8,17 @@
 	<form th:action="@{'/target/' + ${entity.id} + '/tags/addTag'}" method="POST" id=addTag th:object="${tag}">
 	<table>
 		<tr>
-			<td><label for="tagName">Name: </label></td>
+			<td><label for="tagName" style="font-weight: bold;">Name: </label></td>
 			<td><input type="text" id="tagName" name="tagName" placeholder="TAG-NAME" required th:field="*{name}"></td>
 		</tr>
 		
 		<tr>
-  			<td><label for="tagColor">Pick a color:</label></td>
+  			<td><label for="tagColor" style="font-weight: bold;">Pick a color:</label></td>
  			<td> <input type="color" id="tagColor" name="tagColor" required th:field="*{color}"></td>
  		 </tr>
  		 
  		 <tr>
- 		 	<td><label for="tagDescription">Description: </label></td>
+ 		 	<td><label for="tagDescription" style="font-weight: bold;">Description: </label></td>
  		 	<td><textarea rows="7" cols="20" id="tagDescription" name="tagDescription" placeholder="Insert tag's description..." required th:field="*{description}"></textarea></td>
  		 </tr>
  		 <tr>

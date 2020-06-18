@@ -115,5 +115,9 @@ public class Tag {
 		this.tasks.add(t);
 	}
 	
+	public boolean removeTasks(Task t) {
+		return this.tasks.remove(t);
+	}
+	
 	
 }

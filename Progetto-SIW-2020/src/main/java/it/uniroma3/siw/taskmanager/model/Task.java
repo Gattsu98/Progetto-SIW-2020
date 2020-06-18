@@ -167,7 +167,7 @@ public class Task {
 		return this.tags.add(t);
 	}
 	
-	public boolean deleteTag(Tag t) {
+	public boolean removeTag(Tag t) {
 		return this.tags.remove(t);
 	}
 	/**

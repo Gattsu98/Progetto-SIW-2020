@@ -123,6 +123,7 @@ public class TaskController {
 	public String deleteTask(Model model, @PathVariable Long taskId) {
 		Task task= this.taskService.getTask(taskId);
 		Long idProject= this.projectService.findIdProjectByTaskId(taskId);
+		
 		for(Tag t: task.getTags()) {
 			t.deleteTask(task);
 		}
