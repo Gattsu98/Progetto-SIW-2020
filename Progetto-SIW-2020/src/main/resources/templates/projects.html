@@ -5,7 +5,8 @@
 <body>
 	<h1>My Projects:</h1>
 	<div>
-		<table>
+		<div th:if="${projectsList.size()==0}">No projects already created</div>
+		<table th:if="${projectsList.size()>0}">
 			<thead>
 				<tr>
 					<th>Name</th>

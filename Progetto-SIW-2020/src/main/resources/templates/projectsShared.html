@@ -5,9 +5,10 @@
 		
 <head th:replace="fragments/base.html :: titolo"></head>
 <body>
-	<h1 th:text="'This is a list of the projects shared with you ' + ${loggedUser.firstName} + ':'">Shared Projects</h1>
-	<div>
-		<table>
+	<h1 th:text="'This is a list of the projects shared with you, ' + ${loggedUser.firstName} + ':'">Shared Projects</h1>
+	
+	<div th:if="${projectsList.size()==0}">No projects shared with you</div>
+		<table th:if="${projectsList.size()>0}">
 			<thead>
 				<tr>
 					<th>Name</th>

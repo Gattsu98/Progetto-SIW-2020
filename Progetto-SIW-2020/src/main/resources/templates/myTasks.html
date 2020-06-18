@@ -3,11 +3,11 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/base.html :: titolo"></head>
 <body>
-	<!--   <h1 th:text="'This are the tasks assigned to you' + ${loggedUser}"></h1> -->
 
-	<h1>This are the tasks assigned to you</h1>
-
-	<table>
+	<h1>This are the tasks assigned to you:</h1>
+	
+		<div th:if="${tasks.size()==0}">No tasks assigned to you </div>
+		<table th:if="${tasks.size()>0}">
 		<thead>
 			<tr>
 				<th>Name</th>
