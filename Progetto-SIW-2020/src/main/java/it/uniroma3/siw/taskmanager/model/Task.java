@@ -15,7 +15,7 @@ public class Task {
 	@Column (nullable = false)
 	private Boolean completed;
 	
-	@Column
+	@Column (nullable= false)
 	private String description;
 	
 	@Column(nullable=false, length=100)
