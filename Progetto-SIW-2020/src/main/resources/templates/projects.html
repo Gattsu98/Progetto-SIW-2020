@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: titolo"></head>
+<body>
+	<h1>My Projects:</h1>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="project : ${projectsList}">
+					<td><a th:href="'/projects/'+${project.id}" th:text="${project.name}"></a></td>
+					<td th:text="${project.description}"></td>
+
+					<td>
+						<form
+							th:action="@{/projects/{projectId}/shareProjectForm(projectId=${project.id})}" method="GET" id=shareProject>
+							<button type="submit" name="comando" value="share">SHARE</button>
+						</form>
+					</td>
+					<td>
+						<form
+							th:action="@{/projects/{projectId}/delete(projectId=${project.id})}" method="POST" id=deleteProject>
+							<button type="submit" name="comando" value="delete">DELETE</button>
+						</form>
+					</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

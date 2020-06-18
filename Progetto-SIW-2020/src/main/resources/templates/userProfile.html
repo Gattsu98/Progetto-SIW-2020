@@ -1,0 +1,47 @@
+<!DOCTYPE hmtl>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="fragments/base.html :: titolo"></head>
+<body>
+	<table>
+		<tr>
+			<td><h1>Your Profile</h1></td>
+			<td><form th:action="@{/users/me/update}" method="GET" id="updateUserProfile">
+				<button type="submit" name="submit" value="update">UPDATE</button>
+			</form></td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td>Username:</td>
+			<td th:text="${credentials.username}">...</td>
+		</tr>
+		<tr>
+			<td>First Name:</td>
+			<td th:text="${loggedUser.firstName}">...</td>
+		</tr>
+		<tr>
+			<td>Last Name:</td>
+			<td th:text="${loggedUser.lastName}">...</td>
+		</tr>
+		<tr>
+			<td>Role:</td>
+			<td th:text="${credentials.role}">...</td>
+		</tr>
+		<tr></tr>
+		<tr>
+			<td>Registered at:</td>
+			<td th:text="${loggedUser.creationTimeStamp}">...</td>
+		</tr>
+		<tr>
+			<td>Last update:</td>
+			<td th:text="${loggedUser.lastUpdateTimeStamp}">...</td>
+		</tr>
+	</table>
+
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+
+
+</html>

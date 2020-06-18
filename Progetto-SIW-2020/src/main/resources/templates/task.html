@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: titolo"></head>
+<body>
+	<table>
+		<tr>
+			<td th:text="${task.name}" style="font-style: italic; font-variant:small-caps; ; font-size: 20px;"></td>
+			<td th:text="'-> task relativa al progetto'" style="font-size: 20px; font-style:oblique; "></td>
+			<td><a th:href="'/projects/'+${project.id}" th:text="${project.name}" style="font-size: 20px;" ></a></td>
+			<td>
+				<form id="editTask" th:action="@{/projects/task/{taskId}/editTask(taskId=${task.id})}" method="GET">
+					<button th:if="${project.owner.equals(loggedUser)}" type="submit" name="comando" value="edit">EDIT</button>
+				</form>
+			</td>
+		</tr>
+	</table>
+	
+	<table style="margin-top: 25px;">
+		<tr>
+			<td style="font-weight: bold;">State:</td>
+			<td th:if="${task.completed==true}" th:text="'Completed'" style="color:lime; "></td>
+			<td th:if="${task.completed==false}" th:text="'Not-Completed'"  style="color:red"></td>
+			<td>
+				<form th:action="@{/projects/task/{taskId}/completeTask(taskId=${task.id})}" method="POST" id="completeTask">
+					<button th:if="${(task.user!=null && task.user.equals(loggedUser)) && task.completed!=true}" type="submit" name="comando" value="complete">COMPLETE</button>
+				</form>
+			</td>
+		</tr>
+	</table>	
+	
+	<table>
+		<tr>
+			<td style="font-weight: bold;">Assigned to:</td>
+			<td th:if="${credentialsAssigned.username!=null}" th:text="${credentialsAssigned.user.firstName} + ' ' + ${credentialsAssigned.user.lastName} + ' ' + ' > ' + ${credentialsAssigned.username} + ' < '" style="color:lime"></td>
+			<td th:if="${credentialsAssigned.username==null}" style="color:red">Not assigned</td>
+			
+		</tr>
+	</table>
+	
+	<table style="margin-top: 25px;">
+		<tr>
+			<td style="font-weight: bold;">Registered at:</td>
+			<td th:text="${task.creationTimeStamp}">...</td>
+		</tr>
+		<tr>
+			<td style="font-weight: bold;" >Last update:</td>
+			<td th:text="${task.lastUpdateTimeStamp}">...</td>
+		</tr>
+	</table>
+	
+	<div style="margin-top: 25px;">
+		<div style="font-weight: bold;">Description</div>
+		<div th:text="${task.description}"></div>
+	</div>
+	
+	<table th:if="${task.tags.size()>=0}">
+		<tr>
+			<td><h3>Tags:</h3></td>
+		</tr>
+		<tr>
+		<td>
+			<ul>
+				<li th:each="tag : ${task.tags}">
+					<div th:text="${tag.name}" th:style="'color:' + ${tag.color}"></div>
+					<div th:text="${tag.description}"></div>
+				</li>
+			</ul>
+		</tr>
+	</table>
+	
+	
+	
+	<h2>Comments:</h2>
+	<form th:action="@{'/task/' + ${task.id} + '/addComment'}" method="POST" th:object="${comment}">
+	<table>
+		<tr>
+			<td></td>
+			<td><input type="text" placeholder="Write your text here" required th:field="${comment.text}"></td>
+			<td>
+				<button type="submit" name="comando" value="addCommment"> + </button>
+			</td>
+	    </tr>
+    </table> 
+    </form>
+      
+	<table th:if="${task.comments.size()>0}">
+		<thead>
+			<tr>
+				<th>Posted</th>
+				<th>Text</th>
+				<th></th>
+			<tr>
+		</thead>
+		<tbody>
+		
+		<tr th:each="comment : ${task.comments}">
+			<td th:text="${comment.creationTimeStamp}"></td>
+			<td th:text="${comment.text}"></td>
+			<td>
+				<form th:action="@{'/task/' + ${task.id} + '/deleteComment/' + ${comment.id}}" method="POST" id="deleteComment">
+					<button type="submit" name="comando" value="delete">DELETE</button>
+				</form>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+	
+<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

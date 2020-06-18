@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: titolo"></head>
+<body>
+	<h1>Assign the task to one of the Users: </h1>
+		<table>
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>First name</th>
+						<th>Last name</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="credentials : ${availableCredentialsList}">
+						<td th:text="${credentials.username}"></td>
+						<td th:text="${credentials.user.firstName}"></td>
+						<td th:text="${credentials.user.lastName}"></td>
+						<td>
+							<form th:action="@{'/task/' + ${task.id} + '/assignTask/' + ${credentials.user.id}}" method="POST" id="assignTask">
+								<button type="submit" name="comando" value="assignTo">ASSIGN</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

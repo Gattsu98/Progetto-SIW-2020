@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+		
+<head th:replace="fragments/base.html :: titolo"></head>
+<body>
+	<h1 th:text="'This is a list of the projects shared with you ' + ${loggedUser.firstName} + ':'">Shared Projects</h1>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="project : ${projectsList}">
+					<td><a th:href="'/projects/' + ${project.id}" th:text="${project.name}"></a></td>
+					<td th:text="${project.description}"></td>
+				</tr>
+			</tbody>
+		</table>
+	
+	</div>
+
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>				
+</html>

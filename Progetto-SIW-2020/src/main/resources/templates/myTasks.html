@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: titolo"></head>
+<body>
+	<!--   <h1 th:text="'This are the tasks assigned to you' + ${loggedUser}"></h1> -->
+
+	<h1>This are the tasks assigned to you</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Completed</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="task : ${tasks}">
+				<td><a th:href="'/tasks/' + ${task.id}" th:text="${task.name}"></a></td>
+				<td th:text="${task.description}"></td>
+				<td>
+					<div th:if="${task.completed}==true" style="color: lime;">Completed</div>
+					<div th:if="${task.completed}!=true" style="color: red">Not-Completed</div>
+				</td>
+	</table>
+
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: titolo"></head>
+<body>
+<h1 th:text="'Modifica task >' + ${task.name} + '< del progetto:'"></h1>
+	<form th:action="@{/projects/task/{taskId}/editTask(taskId=${task.id})}" method="POST"> 
+		<table>
+			<tr>
+				<td><label for="taskName">Task name:</label></td>
+				<td><input id=taskName type="text" placeholder="task-name" th:value="${task.name}" required th:field="${task.name}"/></td>
+			</tr>
+			<tr>
+				<td><label for="taskDescription">Task description:</label></td>
+				<td><input id="taskDescription" type="text" placeholder="task-description" th:value="${task.description}" th:field="${task.description}"></td>			
+			</tr>
+		</table>
+		<div><button type="submit" name="comando" value="salva">SAVE</button></div>
+	</form>
+
+<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

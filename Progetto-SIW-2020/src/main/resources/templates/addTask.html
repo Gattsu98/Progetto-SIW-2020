@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: titolo"></head>
+<body>
+	<h1 th:text="'Aggiungi un nuovo task al progetto -> ' + ${project.name} + ':'"></h1>
+	<form th:action="@{/projects/{projectId}/addTask(projectId=${project.id})}" method="POST" th:object="${task}"> 
+		<table>
+			<tr>
+				<td><label for="taskName">Task name:</label></td>
+				<td><input id=taskName type="text" placeholder="task-name" required th:field="*{name}"/></td>
+			</tr>
+			<tr>
+				<td><label for="taskDescription">Task description:</label></td>
+				<td><input id="taskDescription" type="text" placeholder="task-description" th:field="*{description}"></td>			
+			</tr>
+		</table>
+		<div><button type="submit" name="comando" value="addTask">REGISTER</button></div>
+	</form>
+<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

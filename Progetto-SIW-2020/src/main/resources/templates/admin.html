@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: titolo"></head>
+<body>
+	<h1 th:text="'Welcome,' + ${loggedUser.firstName} +'!'">Welcome Admin!</h1>
+	<h4><a href="/admin/users">All users list</a></h4>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

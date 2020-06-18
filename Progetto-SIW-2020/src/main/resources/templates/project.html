@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: titolo"></head>
+<body>
+	<table>
+		<tr>
+			<td><h1 th:text="${project.name}"></h1></td>
+			<td>
+				<form id=showEditProjectFrom
+					th:action="@{/projects/{projectId}/editProjectForm(projectId=${project.id})}"
+					method="GET">
+					<button th:if="${project.owner.equals(loggedUser)}" type="submit" name="submit" value="edit">EDIT</button>
+				</form>
+			</td>
+		</tr>
+	</table>
+	
+	<table>
+		<tr>
+			<td
+					th:text="'Owned by: ' + ${ownerCredentials.user.firstName} + ' ' + ${ownerCredentials.user.lastName} + ' > ' + ${ownerCredentials.username} + ' < '"
+					style="color: green; font-size: 12px"></td>
+		</tr>
+
+		<tr>
+			<td><h2 th:text="${project.description}" style="color: gray"></h2></td>
+		</tr>
+	</table>
+	
+	<table th:if="${project.tags.size()>=0}">
+		<tr>
+			<td><h3>Tags:</h3></td>
+			<td>
+				<form
+					th:action="@{'/projects/' + ${project.id} + '/addTag'}" method="GET" id="addTag">
+					<button th:if="${(project.owner.equals(loggedUser))}"  type="submit" name="comando" value="addTag">+</button>
+				</form>
+			</td>
+		</tr>
+	</table>
+	
+			<ul>
+				<li th:each="tag : ${project.tags}">
+					<table>
+						<tr>
+							<td><label for="tagName" style="font-weight: bold;">Tag name:</label></td>
+							<td id="tagName" th:text="${tag.name}" th:style="'color:' + ${tag.color} + ';text-shadow: -0.15px 0 #000, 0 0.15px #000, 0.15px 0 #000, 0 -0.15px #000; letter-spacing: 2px;'"></td>
+							<td>
+								<form th:action="@{'/projects/' + ${project.id} + '/tag/' + ${tag.id} + '/assignTag'}" method="GET" id="assignTag">
+									<button th:if="${(project.owner.equals(loggedUser))}"  type="submit" name="comando" value="assignTag">Assign To</button>
+								</form>
+							</td>
+						</tr>
+					</table>
+					<div style="width: 300px; display: block;" th:text="${tag.description}" id="tagDescr"></div>
+				</li>
+			</ul>
+
+
+	<table>
+		<tr>
+			<td><h3>Shared with:</h3></td>
+			<td>
+				<form
+					th:action="@{/projects/{projectId}/shareProjectForm(projectId=${project.id})}" method="GET" id=shareProject>
+					<button th:if="${(project.owner.equals(loggedUser))}"  type="submit" name="comando" value="share">SHARE</button>
+				</form>
+			</td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+		<td>
+			<ul>
+				<li th:each="credentialsMember : ${credentialsMembers}">
+					<div th:text="${credentialsMember.user.firstName} + ' ' + ${credentialsMember.user.lastName} + ' > ' + ${credentialsMember.username} + ' < '"></div>
+				</li>
+			</ul>
+		</tr>
+	</table>
+
+	<table>
+		<tr>
+			<td><h2>Tasks:</h2></td>
+			<td><form
+					th:action="@{/projects/{projectId}/addTask(projectId=${project.id})}"
+					method="GET">
+					<button type="submit" name="submit" value="addTask"> + </button>
+				</form></td>
+		</tr>
+	</table>
+	<table th:if="${project.tasks.size()>0}">
+		<thead>
+			<tr>
+			<th>Name</th>
+			<th>Assigned to</th>
+			<th>State</th>
+			<th></th>
+			<th></th>
+			<th></th>
+			</tr>
+		</thead>
+		<tbody>
+		
+		<tr th:each="task : ${project.tasks}">
+			<td><a th:href="'/projects/' + ${project.id} + '/tasks/' + ${task.id}" th:text="${task.name}"></a></td>
+			
+			<td> <div th:if="${task.user}!=null" th:text="${task.user.firstName} + ' ' + ${task.user.lastName} + ' > ' + ${(credentialsService.getCredentialsByUserId(task.user.id)).username} + ' < '" style="color:lime;"></div>
+				<div th:if="${task.user}==null" th:text="'Not-Assigned'" style="color:red"></div>
+			</td>
+			<td>
+			 	<div th:if="${task.completed}==true" style="color:lime;">Completed</div>
+				<div th:if="${task.completed}==false" style="color:red">Not-Completed</div>
+			</td>
+			<td>
+				<form th:action="@{/projects/task/{taskId}/assignTask(taskId=${task.id})}" method="GET" id="assignTask">
+					<button th:if="${task.user==null && project.owner.equals(loggedUser)}" type="submit" name="comando" value="assign">ASSIGN</button>
+				</form>
+			</td>
+			<td>
+				<form th:action="@{/projects/task/{taskId}/deleteTask(taskId=${task.id})}" method="POST" id="deleteTask">
+					<button th:if="${project.owner.equals(loggedUser)}" type="submit" name="comando" value="delete">DELETE</button>
+				</form>
+			</td>
+			<td>
+				<form th:action="@{/projects/task/{taskId}/completeTask(taskId=${task.id})}" method="POST" id="completeTask">
+					<button th:if="${(task.user!=null && task.user.equals(loggedUser)) && task.completed!=true}" type="submit" name="comando" value="complete">COMPLETE</button>
+				</form>
+			</td>
+		</tr>
+	</tbody>
+	</table>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

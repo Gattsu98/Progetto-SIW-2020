@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+		xmlns="http://w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: titolo"></head>
+<body>
+	<h1>Edit your Project</h1>
+	<form id="editProjectForm" th:action="@{/projects/{projectId}/edit(projectId=${projectForm.id})}" method="POST">
+		<table>
+			<tr>
+				<td><label for="projectName">Project name</label></td>
+				<td><input id=projectName type="text" placeholder="Project-name" required th:field="${projectForm.name}"/></td>
+				<td th:if="${#fields.hasErrors('projectForm.name')}" th:errors="${projectForm.name}" th:style="color:red"></td>
+			</tr>
+			<tr>
+				<td><label for="projectDescription">Description</label></td>
+				<td><input id="projectDescription" type="text" placeholder="Project-description" th:field="${projectForm.description}"></td>
+				<td th:if="${#fields.hasErrors('projectForm.description')}" th:errors="${projectForm.description}" th:style="'color:red'"></td>
+			</tr>
+			<tr>
+				<td><button type="submit" name="comando" value="save">SAVE</button></td>
+			</tr>
+		</table>
+	</form>
+		<form id="editProjectForm" th:action="@{/projects/{projectId}/edit(projectId=${projectForm.id})}" method="POST">
+			<button type="submit" name="comando" value="cancel">CANCEL</button>
+		</form>
+<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

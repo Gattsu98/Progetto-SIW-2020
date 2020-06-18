@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: titolo"></head>
+<body>
+	<h1>Assign the tag to one of the Task: </h1>
+		<table>
+				<thead>
+					<tr>
+						<th>Task name</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="task : ${availableTask}">
+						<td><a th:href="'/projects/' + ${project.id} + '/tasks/' + ${task.id}" th:text="${task.name}"></a></td>
+						<td>
+							<form th:action="@{'/tasks/' + ${task.id} + '/tag/' + ${tag.id} +'/assignTag'}" method="POST" id="assignTag">
+								<button type="submit" name="comando" value="assignTo">ASSIGN</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>
