@@ -1,0 +1,40 @@
+User
+-sign up
+-autenticazione
+-visualizzare profilo personale
+-aggiornare profilo personale
+-[SOLO ADMIN]rimuovere un user
+-[SOLO ADMIN]visualizzare la lista di tutti gli user registrati
+
+***************************************************************************************************
+Project
+-creare nuovo progetto
+-visualizzare i miei progetti
+-visualizzare progetti condivisi con me
+-aggiornare dati di un progetto
+-cancellare un mio progetto
+-condividere un progetto con un altro utente
+-aggiungere un tag ad un mio progetto
+
+-rimuovere un tag da un mio progetto
+-visualizzare tutte le informazioni relative ad un progetto (descrizione, proprietario, tags, task e utenti con cui è condiviso
+
+
+
+
+***************************************************************************************************
+Task
+-aggiungere un nuovo task ad un mio progetto
+-aggiornare task di un mio progetto
+-cancellare task di un mio progetto
+-assegnare un task di un mio progetto ad un utente che ha visibilità di un mio progetto
+-aggiungere un tag ad un task di un mio progetto
+-aggiungere un commento ad un task di un progetto su cui ho visibilità 
+
+-rimuovere tag da un task a cui era stato associato
+-rimuovere un commento associato ad un task (solo il proprietario del progetto o un utente ADMIN può rimuovere i commenti)
+-visualizzare tutti i Task assegnati all'utente loggato
+-completare un task 
+-visualizzare tutte le informazioni relative ad un task (descrizione, stato di completamento, data di creazione/modifica, a chi è assegnata la task, tags e commenti associati)
+
+***************************************************************************************************

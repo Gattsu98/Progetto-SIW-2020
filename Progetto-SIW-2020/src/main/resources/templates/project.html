@@ -54,7 +54,7 @@
 							</td>
 							<td>
 								<form th:action="@{'/projects/' + ${project.id}+ '/tag/' + ${tag.id} + '/deleteTag'}" method="POST">
-									<button type="submit" name="comando" value="deleteTag">DELETE TAG</button>
+									<button th:if="${project.owner.equals(loggedUser)}" type="submit" name="comando" value="deleteTag">DELETE TAG</button>
 								</form>
 							</td>
 						</tr>

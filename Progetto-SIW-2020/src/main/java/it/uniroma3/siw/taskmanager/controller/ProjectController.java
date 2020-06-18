@@ -69,6 +69,7 @@ public class ProjectController {
 		model.addAttribute("credentialsService", this.credentialsService);
 		model.addAttribute("credentialsMembers", credentialsMembers);
 		model.addAttribute("ownerCredentials", this.credentialsService.getCredentialsByUserId(project.getOwner().getId()));
+		model.addAttribute("loggedCredentials", sessionData.getLoggedCredentials());
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("project", project);
 		

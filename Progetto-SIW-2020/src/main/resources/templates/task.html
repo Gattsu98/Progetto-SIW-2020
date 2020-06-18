@@ -119,7 +119,7 @@
 			<td th:text="${comment.text}"></td>
 			<td>
 				<form th:action="@{'/task/' + ${task.id} + '/deleteComment/' + ${comment.id}}" method="POST" id="deleteComment">
-					<button type="submit" name="comando" value="delete">DELETE</button>
+					<button th:if="${project.owner.equals(loggedUser) || loggedCredentials.getRole().equals('ADMIN')}" type="submit" name="comando" value="delete">DELETE</button>
 				</form>
 			</td>
 		</tr>
