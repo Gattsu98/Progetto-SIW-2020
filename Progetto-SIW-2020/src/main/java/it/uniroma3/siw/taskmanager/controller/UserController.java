@@ -46,12 +46,7 @@ public class UserController {
 	 @Autowired
 	 UserValidator userValidator;
 	
-	/**
-	 * This method is called when a GET request is sent by the User to URL "/home"
-	 * This method prepares and dispatches the User home view.
-	 * @param model
-	 * @return name of the target view
-	 */
+	
 	@RequestMapping(value= {"/home"}, method= RequestMethod.GET)
 	public String home(Model model) {
 		User loggedUser= sessionData.getLoggedUser();
@@ -119,13 +114,7 @@ public class UserController {
 	
 	/*******************************************************************ADMIN**********************************************************************/
 	
-	/**
-	 * This method is called when a GET request is sent by the User to URL "/admin"
-	 * This method prepares and dispatches the welcome view for admin usage.
-	 * 
-	 * @param model
-	 * @return the name of the target view
-	 */
+	
 	@RequestMapping(value = {"/admin"}, method = RequestMethod.GET)
     public String admin(Model model) {
         User loggedUser = sessionData.getLoggedUser();
@@ -133,13 +122,7 @@ public class UserController {
         return "admin";
     }
 	
-	/**
-	 * This method is called when a GET request is sent by the User to URL "/admin/users"
-	 * This method prepares and dispatches the view with the list of all users for admin usage.
-	 * 
-	 * @param model
-	 * @return the name of the target view
-	 */
+	
 	@RequestMapping(value= {"/admin/users"}, method= RequestMethod.GET)
 	public String usersList(Model model) {
 		User loggedUser= sessionData.getLoggedUser();
@@ -152,13 +135,7 @@ public class UserController {
 		return "allUsers";
 	}
 	
-	/**
-	 * This method is called when a POST request is sent by the User to URL "/admin/users/{username}/delete"
-	 * This method deletes the user with the username chosen.
-	 * 
-	 * @param model, username 
-	 * @return the name of the target view
-	 */
+	
 	@RequestMapping(value= {"/admin/users/{username}/delete"}, method=RequestMethod.POST)
 	public String removeUser(Model model, @PathVariable String username) {
 		for(Project p : credentialsService.getCredentials(username).getUser().getVisibleProjects()) {

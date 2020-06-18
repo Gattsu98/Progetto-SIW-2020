@@ -45,11 +45,11 @@
 					<table>
 						<tr>
 							<td><label for="tagName" style="font-weight: bold;">Tag name:</label></td>
-							<td id="tagName" th:text="${tag.name}" th:style="'color:' + ${tag.color} + ';letter-spacing: 2px;'"></td>
-							<td class="color-box" th:style="'background-color:' + ${tag.color}" th:width="20" th:height="20"></td>
+							<td id="tagName" th:text="${tag.name}" th:style="'letter-spacing: 2px;'"></td>
+							<td class="color-box" th:style="'background-color:' + ${tag.color} + '; border-style:solid'" th:width="20" th:height="20"></td>
 							<td>
 								<form th:action="@{'/projects/' + ${project.id} + '/tag/' + ${tag.id} + '/assignTag'}" method="GET" id="assignTag">
-									<button th:if="${(project.owner.equals(loggedUser))}"  type="submit" name="comando" value="assignTag">Assign To</button>
+									<button th:if="${(project.owner.equals(loggedUser))}"  type="submit" name="comando" value="assignTag">ASSIGN TO</button>
 								</form>
 							</td>
 							<td>
