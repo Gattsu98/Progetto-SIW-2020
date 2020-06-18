@@ -6,7 +6,7 @@
 <body>
 <h1>All users</h1>
 <div>
-	<table class="table table-hover">
+	<table class="table table-hover" th:if="${credentialsList.size()>1}">
 		<thead>
 			<tr>
 				<th>Username</th>
@@ -16,7 +16,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="credentials : ${credentialsList}">
+			<tr th:each="credentials : ${credentialsList}" th:if=${!loggedUser.equals(credentials.user)}>
 				<td th:text="${credentials.username}"></td>
 				<td th:text="${credentials.user.firstName}"></td>
 				<td th:text="${credentials.user.lastName}"></td>
@@ -30,8 +30,9 @@
 			</tr>
 		
 		</tbody>
-	
 	</table>
+	
+	<div th:if="${credentialsList.size()==1}">No users except the Admin</div>
 
 </div>
 <footer th:replace="fragments/base.html :: fondo"></footer>

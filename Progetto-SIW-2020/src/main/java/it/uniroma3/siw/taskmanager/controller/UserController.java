@@ -56,7 +56,7 @@ public class UserController {
 	public String home(Model model) {
 		User loggedUser= sessionData.getLoggedUser();
 		model.addAttribute("user", loggedUser);
-		
+		model.addAttribute("credentials", sessionData.getLoggedCredentials());
 		return "home";
 	}
 	
@@ -143,9 +143,9 @@ public class UserController {
 	@RequestMapping(value= {"/admin/users"}, method= RequestMethod.GET)
 	public String usersList(Model model) {
 		User loggedUser= sessionData.getLoggedUser();
+		
 		List<Credentials> credentialsList= this.credentialsService.getAllCredentials();
-		List<User> usersList= this.userService.getAllUsers();
-		model.addAttribute("usersList", usersList);
+		
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("credentialsList", credentialsList);
 		

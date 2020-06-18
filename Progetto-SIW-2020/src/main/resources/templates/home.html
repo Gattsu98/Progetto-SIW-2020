@@ -14,5 +14,7 @@
 	<h4><a href="/users/me">Profile</a></h4>
 	<h4><a href="/logout">Logout</a></h4>
 	</div>
+	
+	<footer th:if=" ${credentials.role.equals('ADMIN')} "class="footer">Go to the <a href="/admin">admin page</a></footer>
 </body>
 </html>

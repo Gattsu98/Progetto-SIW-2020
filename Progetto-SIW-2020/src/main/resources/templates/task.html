@@ -6,9 +6,9 @@
 <body>
 	<table>
 		<tr>
-			<td th:text="${task.name}" style="font-style: italic; font-variant:small-caps; ; font-size: 20px;"></td>
-			<td th:text="'-> task relativa al progetto'" style="font-size: 20px; font-style:oblique; "></td>
-			<td><a th:href="'/projects/'+${project.id}" th:text="${project.name}" style="font-size: 20px;" ></a></td>
+			<td th:text=" ' > ' + ${task.name} + ' < '" style="font-style: italic; font-weight:bolder; ; font-size: 20px; font-variant: small-caps;"></td>
+			<td style="font-size: 15px; font-weight:100; "> task relativa al progetto </td>
+			<td><a th:href="'/projects/'+${project.id}" th:text=" ' > ' + ${project.name} + ' < '" style="font-size: 20px; font-style: italic; font-variant: small-caps;" ></a></td>
 			<td>
 				<form id="editTask" th:action="@{/projects/task/{taskId}/editTask(taskId=${task.id})}" method="GET">
 					<button th:if="${project.owner.equals(loggedUser)}" type="submit" name="comando" value="edit">EDIT</button>
@@ -77,9 +77,9 @@
 	<table>
 		<tr>
 			<td></td>
-			<td><input type="text" placeholder="Write your text here" required th:field="${comment.text}"></td>
+			<td><textarea rows="6" cols="60" placeholder="Write your comment here" required th:field="${comment.text}"></textarea></td>
 			<td>
-				<button type="submit" name="comando" value="addCommment"> + </button>
+				<button type="submit" name="comando" value="addCommment" style="">Add new comment</button>
 			</td>
 	    </tr>
     </table> 

@@ -65,5 +65,17 @@ public class UserService {
 		
 		return usersNotMembers;
 	 }
+	 
+	 @Transactional
+		public List<User> getAllUsersExceptLogged(User loggedUser) {
+			List<User> result= new ArrayList<>();
+			Iterable<User> iterable= this.userRepository.findAll();
+			for(User u: iterable) {
+				if(!u.equals(loggedUser)) {
+				result.add(u);
+				}
+			}
+			return result;
+		}
 
 }
