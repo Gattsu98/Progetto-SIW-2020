@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/* Daniele Laino - 528490 */
+
 @SpringBootApplication
 public class TaskmanagerApplication {
 
