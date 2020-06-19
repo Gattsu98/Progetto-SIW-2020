@@ -73,6 +73,7 @@ public class TaskController {
 		}
 		
 		model.addAttribute("credentialsAssigned", credentialsAssigned);
+		model.addAttribute("loggedCredentials", sessionData.getLoggedCredentials());
 		model.addAttribute("comment", new Comment());
 		model.addAttribute("loggedUser", sessionData.getLoggedUser());
 		model.addAttribute("project", projFromDb);
